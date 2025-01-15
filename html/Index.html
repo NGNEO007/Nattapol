@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ร้านขายมังงะ</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+  <!-- Header -->
+  <header class="header">
+    <h1>ร้านขายมังงะ</h1>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#" id="homeLink">หน้าแรก</a></li>
+        <li><a href="#" id="allMangaLink">มังงะทั้งหมด</a></li>
+        <li><a href="#" id="cartLink">ตะกร้าสินค้า</a></li>
+        <li><a href="#" id="cartLink">หมวดหมู่</a></li>
+        <li><a href="#" id="cartLink">สมัครสมาชิก</a></li>
+      </ul>
+    </nav>
+  </header>
+  <H3>ผู้จัดทำ ณัฐพล จันทร์สุข 66202040009</H3>
+
+  <!-- Main Content -->
+  <main id="mainContent">
+    <section id="homeSection">
+      <h2>ยินดีต้อนรับสู่ร้านขายมังงะ</h2>
+      <p>เลือกซื้อและเพลิดเพลินกับมังงะที่คุณชื่นชอบ</p>
+    </section>
+
+    <section id="allMangaSection" class="hidden">
+      <h2>มังงะทั้งหมด</h2>
+      <div class="manga-list">
+        <!-- Manga Items -->
+        <div class="manga-item" data-id="1" data-title="One Piece" data-price="200">
+          <img src="https://cdn-ookbee.okbcdn.net/Books/InterComic/2022/2022091203351833359/Thumbnails/Cover.jpg" alt="One Piece">
+          <h3>One Piece</h3>
+          <p>ราคา: 80 บาท</p>
+          <button class="add-to-cart">เพิ่มลงตะกร้า</button>
+        </div>
+        <div class="manga-item" data-id="2" data-title="Naruto" data-price="180">
+          <img src="https://cdn-local.mebmarket.com/meb/server1/103390/Thumbnail/book_detail_large.gif?2" alt="Naruto">
+          <h3>Naruto</h3>
+          <p>ราคา: 180 บาท</p>
+          <button class="add-to-cart">เพิ่มลงตะกร้า</button>
+        </div>
+        <div class="manga-item" data-id="2" data-title="(LN) เมื่อหนี้ที่พ่อแม่ทิ้งไว้ต้องชดใช้ด้วยการไปอยู่กับสาวม.ปลายที่น่ารักที่สุดในญี่ปุ่น เล่ม 5 (ฉบับจบ)" data-price="180">
+            <img src="https://www.phoenixnext.com/media/nextgenimages/media/catalog/product/cache/0a2cd843897b8bcd4a0dda42cebedd04/l/n/ln0714-01.webp" alt="Naruto">
+            <h3>(LN) เมื่อหนี้ที่พ่อแม่ทิ้งไว้ต้องชดใช้ด้วยการไปอยู่กับสาวม.ปลายที่น่ารักที่สุดในญี่ปุ่น เล่ม 5 (ฉบับจบ)</h3>
+            <p>ราคา: 310 บาท</p>
+            <button class="add-to-cart">เพิ่มลงตะกร้า</button>
+          </div>
+          <div class="manga-item" data-id="2" data-title="(LN) จอมมารเกิดใหม่ วิทยาลัยผู้พิทักษ์ เล่ม 10" data-price="180">
+            <img src="https://www.phoenixnext.com/media/nextgenimages/media/catalog/product/cache/0a2cd843897b8bcd4a0dda42cebedd04/l/n/ln0713-01.webp" alt="Naruto">
+            <h3>(LN) จอมมารเกิดใหม่ วิทยาลัยผู้พิทักษ์ เล่ม 10</h3>
+            <p>ราคา: 290 บาท</p>
+            <button class="add-to-cart">เพิ่มลงตะกร้า</button>
+          </div>
+          <div class="manga-item" data-id="2" data-title="(LN) ยอมเป็นแฟนเบอร์สองของเธอก็ได้ เล่ม 5" data-price="180">
+            <img src="https://www.phoenixnext.com/media/nextgenimages/media/catalog/product/cache/0a2cd843897b8bcd4a0dda42cebedd04/l/n/ln0715-01.webp" alt="Naruto">
+            <h3>(LN) ยอมเป็นแฟนเบอร์สองของเธอก็ได้ เล่ม 5</h3>
+            <p>ราคา: 310.00 บาท</p>
+            <button class="add-to-cart">เพิ่มลงตะกร้า</button>
+          </div>
+          <div class="manga-item" data-id="2" data-title="(MG) ด้วยรักและพังทลาย (การ์ตูน) เล่ม 1" data-price="180">
+            <img src="https://www.phoenixnext.com/media/nextgenimages/media/catalog/product/cache/0a2cd843897b8bcd4a0dda42cebedd04/m/g/mgm00227-01.webp" alt="Naruto">
+            <h3>(MG) ด้วยรักและพังทลาย (การ์ตูน) เล่ม 1</h3>
+            <p>ราคา: 185 บาท</p>
+            <button class="add-to-cart">เพิ่มลงตะกร้า</button>
+          </div>
+          <div class="manga-item" data-id="2" data-title="That Time I Got Reincarnated as a Slime" data-price="180">
+            <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2024/02/that-time-i-got-reincarnated-as-a-slime-tv-series-poster.jpg?q=49&fit=crop&w=480&dpr=2" alt="Naruto">
+            <h3>That Time I Got Reincarnated as a Slime</h3>
+            <p>ราคา: 180 บาท</p>
+            <button class="add-to-cart">เพิ่มลงตะกร้า</button>
+          </div>
+          <div class="manga-item" data-id="2" data-title="Mashle: Magic and Muscles" data-price="180">
+            <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2024/03/mashle-magic-and-muscles-tv-poster.jpg?q=49&fit=crop&w=480&dpr=2" alt="Naruto">
+            <h3>Mashle: Magic and Muscles</h3>
+            <p>ราคา: 180 บาท</p>
+            <button class="add-to-cart">เพิ่มลงตะกร้า</button>
+          </div>
+          <div class="manga-item" data-id="2" data-title="Spy x Family" data-price="180">
+            <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/12/spy-x-family-anime-series-poster.jpg?q=49&fit=crop&w=480&dpr=2" alt="Naruto">
+            <h3>Spy x Family</h3>
+            <p>ราคา: 180 บาท</p>
+            <button class="add-to-cart">เพิ่มลงตะกร้า</button>
+          </div>
+          <div class="manga-item" data-id="2" data-title="Wind Breaker" data-price="180">
+            <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2024/06/wind-breaker-anime-poster.jpg?q=49&fit=crop&w=480&dpr=2" alt="Naruto">
+            <h3>Wind Breaker</h3>
+            <p>ราคา: 180 บาท</p>
+            <button class="add-to-cart">เพิ่มลงตะกร้า</button>
+          </div>
+          <div class="manga-item" data-id="2" data-title="Oshi No Ko" data-price="180">
+            <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/06/oshi-no-ko-tv-poster.jpg?q=49&fit=crop&w=480&dpr=2" alt="Naruto">
+            <h3>Oshi No Ko</h3>
+            <p>ราคา: 180 บาท</p>
+            <button class="add-to-cart">เพิ่มลงตะกร้า</button>
+          </div>
+          <div class="manga-item" data-id="2" data-title="My Hero Academia" data-price="180">
+            <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2022/07/My-Hero-S5-Promo.jpg?q=70&fit=crop&w=480&dpr=1" alt="Naruto">
+            <h3>My Hero Academia</h3>
+            <p>ราคา: 180 บาท</p>
+            <button class="add-to-cart">เพิ่มลงตะกร้า</button>
+          </div>
+          <div class="manga-item" data-id="2" data-title="Haikyu!!" data-price="180">
+            <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2024/03/haikyu-2014.jpg?q=49&fit=crop&w=480&dpr=2" alt="Naruto">
+            <h3>Haikyu!!</h3>
+            <p>ราคา: 180 บาท</p>
+            <button class="add-to-cart">เพิ่มลงตะกร้า</button>
+          </div>    
+      </div>
+    </section>
+
+    <section id="cartSection" class="hidden">
+      <h2>ตะกร้าสินค้า</h2>
+      <div id="cartItems">
+        <p>ไม่มีสินค้าในตะกร้า</p>
+      </div>
+      <button id="checkoutButton" class="hidden">ชำระเงิน</button>
+    </section>
+  </main>
+  <section id="allMangaSection" class="hidden">
+    <h2>มังงะทั้งหมด</h2>
+    <div class="manga-list">
+        <!-- Registration Section -->
+<section id="registerSection">
+    <h2>สมัครสมาชิก</h2>
+    <form id="registerForm" method="POST" action="register.php">
+      <label for="username">ชื่อผู้ใช้งาน:</label>
+      <input type="text" id="username" name="username" required>
+      
+      <label for="email">อีเมล:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="password">รหัสผ่าน:</label>
+      <input type="password" id="password" name="password" required>
+      
+      <label for="confirmPassword">ยืนยันรหัสผ่าน:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required>
+      
+      <button type="submit">สมัครสมาชิก</button>
+    </form>
+  </section>
+  
+
+  <script src="script.js"></script>
+</body>
+</html>
