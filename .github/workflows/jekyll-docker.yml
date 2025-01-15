@@ -1,0 +1,369 @@
+name: Jekyll site CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:CREATE DATABASE manga_store;
+
+USE manga_store;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+<?php
+// เชื่อมต่อฐานข้อมูล
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "manga_store";
+
+// สร้างการเชื่อมต่อ
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// ตรวจสอบการเชื่อมต่อ
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // รับข้อมูลจากฟอร์ม
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+
+    // ตรวจสอบว่ารหัสผ่านและยืนยันรหัสผ่านตรงกัน
+    if ($password !== $confirmPassword) {
+        echo "รหัสผ่านไม่ตรงกัน";
+        exit;
+    }
+
+    // เข้ารหัสรหัสผ่าน
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+    // ตรวจสอบอีเมลซ้ำในฐานข้อมูล
+    $sql = "SELECT * FROM users WHERE email='$email'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        echo "อีเมลนี้ถูกใช้แล้ว";
+        exit;
+    }
+
+    // เพิ่มข้อมูลผู้ใช้ลงฐานข้อมูล
+    $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashedPassword')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "สมัครสมาชิกสำเร็จ";
+    } else {
+        echo "เกิดข้อผิดพลาด: " . $conn->error;
+    }
+
+    // ปิดการเชื่อมต่อ
+    $conn->close();
+}
+?>
+
+document.addEventListener("DOMContentLoaded", () => {
+    const homeSection = document.getElementById("homeSection");
+    const allMangaSection = document.getElementById("allMangaSection");
+    const cartSection = document.getElementById("cartSection");
+    const cartItemsDiv = document.getElementById("cartItems");
+    const checkoutButton = document.getElementById("checkoutButton");
+  
+    const homeLink = document.getElementById("homeLink");
+    const allMangaLink = document.getElementById("allMangaLink");
+    const cartLink = document.getElementById("cartLink");
+  
+    let cart = [];
+  
+    // Navigation
+    homeLink.addEventListener("click", () => {
+      showSection(homeSection);
+    });
+  
+    allMangaLink.addEventListener("click", () => {
+      showSection(allMangaSection);
+    });
+  
+    cartLink.addEventListener("click", () => {
+      showCart();
+      showSection(cartSection);
+    });
+  
+    // Add to Cart
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+      button.addEventListener("click", event => {
+        const mangaItem = event.target.closest(".manga-item");
+        const mangaId = mangaItem.getAttribute("data-id");
+        const mangaTitle = mangaItem.getAttribute("data-title");
+        const mangaPrice = mangaItem.getAttribute("data-price");
+  
+        const existingItem = cart.find(item => item.id === mangaId);
+        if (existingItem) {
+          existingItem.quantity++;
+        } else {
+          cart.push({ id: mangaId, title: mangaTitle, price: mangaPrice, quantity: 1 });
+        }
+  
+        alert(`เพิ่ม "${mangaTitle}" ลงในตะกร้าสินค้าเรียบร้อยแล้ว!`);
+      });
+    });
+  
+    // Show Cart
+    function showCart() {
+      cartItemsDiv.innerHTML = "";
+  
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = "<p>ไม่มีสินค้าในตะกร้า</p>";
+        checkoutButton.classList.add("hidden");
+      } else {
+        cart.forEach(item => {
+          const itemDiv = document.createElement("div");
+          itemDiv.textContent = `${item.title} - ${item.quantity} เล่ม - ${item.price * item.quantity} บาท`;
+          cartItemsDiv.appendChild(itemDiv);
+        });
+        checkoutButton.classList.remove("hidden");
+        
+      }
+    }
+    
+  
+    // Section Navigation Helper
+    function showSection(section) {
+      [homeSection, allMangaSection, cartSection].forEach(sec => sec.classList.add("hidden"));
+      section.classList.remove("hidden");
+    }
+  });
+  
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* Header */
+  .header {
+    background-color: #282c34;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links li {
+    margin: 0 10px;
+  }
+  
+  .nav-links a {
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-links a:hover {
+    background-color: #444;
+  }
+  
+  /* Main Content */
+  main {
+    padding: 20px;
+  }
+  
+  section {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Manga List */
+  .manga-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+  }
+  
+  .manga-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .manga-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .manga-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .manga-item h3 {
+    font-size: 16px;
+    margin: 10px 0 5px;
+  }
+  
+  .manga-item p {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .manga-item button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .manga-item button:hover {
+    background-color: #218838;
+  }
+  
+  /* Cart Section */
+  #cartItems div {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  #checkoutButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  #checkoutButton:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    background-color: #282c34;
+    color: #fff;
+    padding: 10px 0;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+<?php
+// เชื่อมต่อฐานข้อมูล
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "manga_store";
+
+// สร้างการเชื่อมต่อ
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// ตรวจสอบการเชื่อมต่อ
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // รับข้อมูลจากฟอร์ม
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // ตรวจสอบข้อมูลในฐานข้อมูล
+    $sql = "SELECT * FROM users WHERE email='$email'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        // ตรวจสอบรหัสผ่าน
+        if (password_verify($password, $row['password'])) {
+            echo "เข้าสู่ระบบสำเร็จ";
+            // สามารถเพิ่มระบบการตั้ง session หรือ redirect ได้ที่นี่
+        } else {
+            echo "รหัสผ่านไม่ถูกต้อง";
+        }
+    } else {
+        echo "อีเมลนี้ไม่พบในระบบ";
+    }
+
+    // ปิดการเชื่อมต่อ
+    $conn->close();
+}
+?>
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the site in the jekyll/builder container
+      run: |
+        docker run \
+        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+        jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
